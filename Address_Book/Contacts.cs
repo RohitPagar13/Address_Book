@@ -55,7 +55,7 @@ namespace Address_Book
 
         }
 
-        public Contacts()
+        public Contact()
         {
 
             Console.WriteLine("Enter First Name: ");

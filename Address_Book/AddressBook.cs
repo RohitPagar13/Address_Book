@@ -1,48 +1,54 @@
-﻿namespace Address_Book
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Address_Book
 {
     internal class AddressBook
     {
-        internal static void Initialize()
+        public void GotoContact()
         {
-            List<Contacts> AddressBook = new List<Contacts>();
-
             while (true)
             {
-                Console.WriteLine("What you want to do? \n1: Add New Contact \n2: Display Record \n3: Edit details \n4: Delete Record \n0: Exit \n");
+                List<Contact> Contacts = new List<Contact>();
+
+                Console.WriteLine("What you want to do? \n1: Add New Contact \n2: Display Record \n3: Edit details \n4: Delete Record \n0: Exit from the Address Book\n");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice == 0)
                 {
-                    Console.WriteLine("Exiting...");
+                    Console.WriteLine("Exiting From AddressBook");
                     break;
                 }
                 switch (choice)
                 {
                     case 1:
-                        AddressBook.Add(new Contacts());
-                        Console.WriteLine("\nRecore added to the AddressBook");
+                        Contacts.Add(new Contact());
+                        Console.WriteLine("\nRecord added to the Contacts");
                         break;
 
                     case 2:
                         Console.WriteLine("\nEnter Name to Display details");
                         string dName = Console.ReadLine();
 
-                        if (AddressBook.Count != 0)
+                        if (Contacts.Count != 0)
                         {
-                            foreach (Contacts contacts in AddressBook)
+                            foreach (Contact contact in Contacts)
                             {
-                                if (contacts.getFName().Equals(dName))
+                                if (contact.getFName().Equals(dName))
                                 {
-                                    contacts.DisplayRecord();
+                                    contact.DisplayRecord();
                                 }
                                 else
                                 {
-                                    Console.WriteLine("\nYou are not in the AddressBook");
+                                    Console.WriteLine("\nRecord not found");
                                 }
                             }
                         }
                         else
                         {
-                            Console.WriteLine("\nYou are not in the AddressBook\n");
+                            Console.WriteLine("\nRecord not found try to create the new contact\n");
                         }
                         break;
 
@@ -50,24 +56,24 @@
                         Console.WriteLine("\nEnter Name to Edit details");
                         string name = Console.ReadLine();
 
-                        if (AddressBook.Count != 0)
+                        if (Contacts.Count != 0)
                         {
-                            foreach (Contacts contacts in AddressBook)
+                            foreach (Contact contact in Contacts)
                             {
-                                if (contacts.getFName().Equals(name))
+                                if (contact.getFName().Equals(name))
                                 {
-                                    contacts.UpdateContact();
-                                    Console.WriteLine("\nRecord updated in the AddressBook");
+                                    contact.UpdateContact();
+                                    Console.WriteLine("\nRecord updated in the Contacts");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("\nYou are not in the AddressBook");
+                                    Console.WriteLine("\nYou are not in the Contacts");
                                 }
                             }
                         }
                         else
                         {
-                            Console.WriteLine("\nYou are not in the AddressBook");
+                            Console.WriteLine("\nYou are not in the Contacts");
                         }
                         break;
 
@@ -75,25 +81,25 @@
                         Console.WriteLine("\nEnter Name to Edit details");
                         string delname = Console.ReadLine();
 
-                        if (AddressBook.Count != 0)
+                        if (Contacts.Count != 0)
                         {
-                            foreach (Contacts contacts in AddressBook)
+                            foreach (Contact contact in Contacts)
                             {
-                                if (contacts.getFName().Equals(delname))
+                                if (contact.getFName().Equals(delname))
                                 {
-                                    AddressBook.Remove(contacts);
-                                    Console.WriteLine("\nRecord deleted in the AddressBook");
+                                    Contacts.Remove(contact);
+                                    Console.WriteLine("\nRecord deleted in the Contacts");
                                     break;
                                 }
                                 else
                                 {
-                                    Console.WriteLine("\nYou are not in the AddressBook");
+                                    Console.WriteLine("\nYou are not in the Contacts");
                                 }
                             }
                         }
                         else
                         {
-                            Console.WriteLine("\nYou are not in the AddressBook");
+                            Console.WriteLine("\nYou are not in the Contacts");
                         }
                         break;
 
@@ -102,13 +108,6 @@
                         break;
                 }
             }
-        }
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Welcome to Address Book. \n");
-
-            Initialize();
-
         }
     }
 }
