@@ -13,22 +13,38 @@ namespace Address_Book
         private string address;
         private string city;
         private string state;
-        private long zip;
-        private long phone;
+        private string zip;
+        private string phone;
         private string email;
 
-        public Contacts(string firstName, string lastName, string address, string city, string state, long zip, long phone, string email)
+
+        public Contacts()
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.address = address;
-            this.city = city;
-            this.state = state;
-            this.zip = zip;
-            this.phone = phone;
-            this.email = email;
+
+            Console.WriteLine("Enter First Name: ");
+            this.firstName = Console.ReadLine();
+
+            Console.WriteLine("Enter Last Name: ");
+            this.lastName = Console.ReadLine();
+
+            Console.WriteLine("Enter Address: ");
+            this.address = Console.ReadLine();
+
+            Console.WriteLine("Enter City: ");
+            this.city = Console.ReadLine();
+
+            Console.WriteLine("Enter State: ");
+            this.state = Console.ReadLine(); ;
+
+            Console.WriteLine("Enter Zip: ");
+            this.zip = Console.ReadLine();
+
+            Console.WriteLine("Enter PhoneNumber: ");
+            this.phone = Console.ReadLine();
+
+            Console.WriteLine("Enter email: ");
+            this.email = Console.ReadLine();
+
         }
-
-
     }
 }
