@@ -19,8 +19,47 @@
             }
         }
 
+        public static void ViewPersonsByCity()
+        {
+            Console.WriteLine("List of persons by city");
+        }
 
+        public static List<string> ListAllCities()
+        {
+            List<string> cities = new List<string>();
+            foreach (var addressBook in addressBooks)
+            {
+                foreach (Contact contact in addressBook.Value.getContactList())
+                {
+                    if (!cities.Contains(contact.getCity()))
+                    {
+                        cities.Add(contact.getFName());
+                    }
+                }
+            }
+            return cities;
+        }
 
+        public static void countByCity()
+        {
+            List<string> cities = ListAllCities();
+            int count;
+            for (int i = 0; i < cities.Count; i++)
+            {
+                count = 0;
+                foreach (var addressBook in addressBooks)
+                {
+                    foreach (Contact contact in addressBook.Value.getContactList())
+                    {
+                        if (contact.getCity().Equals(cities[i]))
+                        {
+                            count++;
+                        }
+                    }
+                }
+                Console.WriteLine("City: " + cities[i] + " Count:" + count);
+            }
+        }
         static void GotoAddressBook()
         {
 
