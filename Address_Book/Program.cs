@@ -5,7 +5,7 @@
         static Dictionary<string, AddressBook> addressBooks = new Dictionary<string, AddressBook>();
         public static void SearchByCity(string City)
         {
-            Console.WriteLine("\nBelow is the list of the names of the persons from same city in multiple Address Books");
+            Console.WriteLine("\nBelow is the list of the names of the persons from "+City+" city in multiple Address Books");
             foreach (var addressBook in addressBooks)
             {
                 foreach (Contact contact in addressBook.Value.getContactList())
@@ -115,6 +115,15 @@
                     case 3:
                         Console.WriteLine("\nEnter Name of the city");
                         SearchByCity(Console.ReadLine());
+                        break;
+
+                    case 4:
+                        Console.WriteLine("\nBelow is the List of cities with count of persons in that city");
+                        countByCity();
+                        break;
+
+                    default:
+                        Console.WriteLine("Enter Valid choice");
                         break;
                 }
             }
