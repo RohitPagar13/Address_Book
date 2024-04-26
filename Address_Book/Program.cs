@@ -2,14 +2,33 @@
 {
     internal class Program
     {
+        static Dictionary<string, AddressBook> addressBooks = new Dictionary<string, AddressBook>();
+        public static void SearchByCity(string City)
+        {
+            Console.WriteLine("\nBelow is the list of the names of the persons from same city in multiple Address Books");
+            foreach (var addressBook in addressBooks)
+            {
+                foreach (Contact contact in addressBook.Value.getContactList())
+                {
+                    if (contact.getCity().Equals(City))
+                    {
+
+                        Console.WriteLine(contact.getFName());
+                    }
+                }
+            }
+        }
+
+
+
         static void GotoAddressBook()
         {
-            Dictionary<string, AddressBook> addressBooks = new Dictionary<string, AddressBook>();
+
             while (true)
             {
 
 
-                Console.WriteLine("What you want to do? \n1: Add New AddressBook \n2: Want to Add/Update contact to the AdressBook \n0: Exit from the System\n");
+                Console.WriteLine("\nWhat you want to do? \n1: Add New AddressBook \n2: Want to Add/Update contact to the AdressBook \n3: Want to Search person by their City \n0: Exit from the System\n");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice == 0)
                 {
@@ -52,6 +71,11 @@
                             AddressBook AddressBook = addressBooks[bookName1];
                             AddressBook.GotoContact();
                         }
+                        break;
+
+                    case 3:
+                        Console.WriteLine("\nEnter Name of the city");
+                        SearchByCity(Console.ReadLine());
                         break;
                 }
             }

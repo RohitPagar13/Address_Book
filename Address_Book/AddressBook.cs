@@ -8,14 +8,17 @@ namespace Address_Book
 {
     internal class AddressBook
     {
+        List<Contact> Contacts = new List<Contact>();
+
+
         public void GotoContact()
         {
-            List<Contact> Contacts = new List<Contact>();
+
             while (true)
             {
 
 
-                Console.WriteLine("What you want to do? \n1: Add New Contact \n2: Display Record \n3: Edit details \n4: Delete Record \n0: Exit from the Address Book\n");
+                Console.WriteLine("\nWhat you want to do? \n1: Add New Contact \n2: Display Record \n3: Edit details \n4: Delete Record \n0: Exit from the Address Book\n");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice == 0)
                 {
@@ -47,7 +50,7 @@ namespace Address_Book
                             }
                             else
                             {
-                                Console.WriteLine("First Name already exists");
+                                Console.WriteLine("First Name already exists please try with different name");
                             }
                         }
                         else
@@ -137,6 +140,11 @@ namespace Address_Book
                         break;
                 }
             }
+        }
+
+        public List<Contact> getContactList()
+        {
+            return Contacts;
         }
     }
 }
