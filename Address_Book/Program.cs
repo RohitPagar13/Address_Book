@@ -2,7 +2,6 @@
 {
     internal class Program
     {
-
         static void GotoAddressBook()
         {
             Dictionary<string, AddressBook> addressBooks = new Dictionary<string, AddressBook>();
@@ -14,24 +13,24 @@
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice == 0)
                 {
-                    Console.WriteLine("Exiting from System");
+                    Console.WriteLine("\nExiting from System");
                     break;
                 }
 
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Enter Name of the AddressBook");
+                        Console.WriteLine("\nEnter Name of the AddressBook");
                         string bookName = Console.ReadLine();
                         if (bookName == null)
                         {
-                            Console.WriteLine("Book Name cannot be null");
+                            Console.WriteLine("\nBook Name cannot be null");
                         }
                         else
                         {
                             if (addressBooks.ContainsKey(bookName))
                             {
-                                Console.WriteLine("Address book name already exists.");
+                                Console.WriteLine("\nAddress book name already exists.");
                             }
                             else
                             {
@@ -42,11 +41,11 @@
                         break;
 
                     case 2:
-                        Console.WriteLine("Enter Name of the AddressBook");
+                        Console.WriteLine("\nEnter Name of the AddressBook");
                         string bookName1 = Console.ReadLine();
                         if (bookName1 == null)
                         {
-                            Console.WriteLine("Enter Valid Name of the AddressBook");
+                            Console.WriteLine("\nEnter Valid Name of the AddressBook");
                         }
                         else
                         {
