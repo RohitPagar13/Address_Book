@@ -16,7 +16,7 @@ namespace Address_Book
 
             while (true)
             {
-                Console.WriteLine("\nWhat you want to do? \n1: Add New Contact \n2: Display Record \n3: Edit details \n4: Delete Record \n5: Sort Contacts by first name \n0: Exit from the Address Book\n");
+                Console.WriteLine("\nWhat you want to do? \n1: Add New Contact \n2: Display Record \n3: Edit details \n4: Delete Record \n5: Sort Contacts by first name \n6: Sort Contacts by City \n0: Exit from the Address Book\n");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice == 0)
                 {
@@ -134,8 +134,13 @@ namespace Address_Book
                         break;
 
                     case 5:
-                        Console.WriteLine("Below is the sorted list of contacts");
+                        Console.WriteLine("Below is the sorted list of contacts sorted by First Name");
                         SortContacts();
+                        break;
+
+                    case 6:
+                        Console.WriteLine("Below is the sorted list of contacts sorted by City");
+                        SortContactsByCity();
                         break;
 
                     default:
@@ -158,6 +163,16 @@ namespace Address_Book
             {
                 Console.WriteLine((i+1)+". "+persons[i]);
             } 
+        }
+
+        public void SortContactsByCity()
+        {
+            List<Contact> persons = Contacts.OrderBy(key => key.getCity()).ToList();
+
+            for (int i = 0; i < persons.Count; i++)
+            {
+                Console.WriteLine((i + 1) + ". " + persons[i]);
+            }
         }
     }
 
