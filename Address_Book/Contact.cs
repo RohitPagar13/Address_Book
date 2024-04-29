@@ -125,5 +125,10 @@ namespace Address_Book
             Console.WriteLine("Phone: " + this.phone);
             Console.WriteLine("Email: " + this.email);
         }
+
+        public override string ToString()
+        {
+            return "First Name: "+ firstName+ ", Last Name: "+lastName+ ", Address: "+address+", City: "+city+", State: "+state+", Zip: "+zip+", Phone No.: "+phone+", Email: "+email;
+        }
     }
 }

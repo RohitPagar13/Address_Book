@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\BridgeLabz\\Assignment\\Address_Book\\Address_Book.csproj",
+      "projectUniqueName": "E:\\BridgeLabz\\Address_Book\\Address_Book\\Address_Book.csproj",
       "projectName": "Address_Book",
-      "projectPath": "E:\\BridgeLabz\\Assignment\\Address_Book\\Address_Book.csproj",
+      "projectPath": "E:\\BridgeLabz\\Address_Book\\Address_Book\\Address_Book.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "E:\\BridgeLabz\\Assignment\\Address_Book\\obj\\",
+      "outputPath": "E:\\BridgeLabz\\Address_Book\\Address_Book\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
