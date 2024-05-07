@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Address_Book
 {
-    internal class Contact
+    public class Contact
     {
-        private string firstName;
-        private string lastName;
-        private string address;
-        private string city;
-        private string state;
-        private string zip;
-        private string phone;
-        private string email;
-        private string bookName;
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string address { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
+        public string zip { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+        public string bookName { get; set; }
 
         public string getFName()
         {
@@ -56,10 +56,20 @@ namespace Address_Book
 
         }
 
-        public Contact(string fName, string bookname)
+        public string getBookName()
+        {
+            return bookName;
+        }
+
+        public Contact()
         {
 
-            this.firstName = fName;
+        }
+
+        public Contact(string firstName, string bookName)
+        {
+
+            this.firstName = firstName;
 
             Console.WriteLine("Enter Last Name: ");
             this.lastName = Console.ReadLine();
@@ -82,11 +92,9 @@ namespace Address_Book
             Console.WriteLine("Enter email: ");
             this.email = Console.ReadLine();
 
-            this.bookName = bookname;
+            this.bookName = bookName;
 
         }
-
-
 
         public void UpdateContact()
         {
@@ -131,7 +139,7 @@ namespace Address_Book
 
         public override string ToString()
         {
-            return "First Name: "+ firstName+ ", Last Name: "+lastName+ ", Address: "+address+", City: "+city+", State: "+state+", Zip: "+zip+", Phone No.: "+phone+", Email: "+email;
+            return "AddressBook Name: "+ bookName+ ", First Name: " + firstName+ ", Last Name: "+lastName+ ", Address: "+address+", City: "+city+", State: "+state+", Zip: "+zip+", Phone No.: "+phone+", Email: "+email;
         }
 
 

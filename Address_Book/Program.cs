@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace Address_Book
 {
@@ -115,9 +119,13 @@ namespace Address_Book
                     case 2:
                         Console.WriteLine("\nEnter Name of the AddressBook");
                         string bookName1 = Console.ReadLine();
-                        if (bookName1 == null)
+                        if (bookName1 == null )
                         {
                             Console.WriteLine("\nEnter Valid Name of the AddressBook");
+                        }
+                        else if (!addressBooks.ContainsKey(bookName1))
+                        {
+                            Console.WriteLine("Address book does not exists");
                         }
                         else
                         {
@@ -185,6 +193,15 @@ namespace Address_Book
                         Read();
                         break;
 
+                    case 8:
+                        WriteDataToCsv();
+                        break;
+
+                    case 9:
+                        Console.WriteLine("Below is the data from the file:\n");
+                        ReadDataFromCsv();
+                        break;
+
                     default:
                         Console.WriteLine("Enter Valid choice");
                         break;
@@ -221,6 +238,49 @@ namespace Address_Book
                     Console.WriteLine(line);
                 }
             }
+        }
+
+        public static void ReadDataFromCsv()
+        {
+            string filepath = "E:\\BridgeLabz\\Address_Book\\CSV\\contactList.csv";
+            
+            using (var reader = new StreamReader(filepath))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                csv.Context.RegisterClassMap<ContactMap>();
+                var contacts = csv.GetRecords<Contact>().ToList();
+                foreach (Contact contact in contacts)
+                {
+                    Console.WriteLine($"Book Name: {contact.bookName}, First Name: {contact.firstName}, Last Name: {contact.lastName}, Address: {contact.address}, City: {contact.city}, State: {contact.state}, Zip: {contact.zip}, Phone: {contact.phone}, Email: {contact.email}");
+                }
+            }
+        }
+
+        public static void WriteDataToCsv()
+        {
+
+            try
+            {
+                string filepath = "E:\\BridgeLabz\\Address_Book\\CSV\\contactList.csv";
+                var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    HasHeaderRecord = true
+                };
+
+                using (StreamWriter writer = new StreamWriter(filepath))
+                using (CsvWriter csv = new CsvWriter(writer, csvConfig))
+                {
+                    csv.WriteRecords(addressBooks.SelectMany(addressBook => addressBook.Value.getContactList()));
+                    writer.Flush();
+                }
+
+                System.Console.WriteLine("Address book has been written to CSV file.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            
         }
 
         static void Main(string[] args)
