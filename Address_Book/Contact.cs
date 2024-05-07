@@ -16,6 +16,7 @@ namespace Address_Book
         private string zip;
         private string phone;
         private string email;
+        private string bookName;
 
         public string getFName()
         {
@@ -55,7 +56,7 @@ namespace Address_Book
 
         }
 
-        public Contact(string fName)
+        public Contact(string fName, string bookname)
         {
 
             this.firstName = fName;
@@ -80,6 +81,8 @@ namespace Address_Book
 
             Console.WriteLine("Enter email: ");
             this.email = Console.ReadLine();
+
+            this.bookName = bookname;
 
         }
 
@@ -130,5 +133,8 @@ namespace Address_Book
         {
             return "First Name: "+ firstName+ ", Last Name: "+lastName+ ", Address: "+address+", City: "+city+", State: "+state+", Zip: "+zip+", Phone No.: "+phone+", Email: "+email;
         }
+
+
+        
     }
 }

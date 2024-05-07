@@ -8,10 +8,11 @@ namespace Address_Book
 {
     internal class AddressBook
     {
+        
         List<Contact> Contacts = new List<Contact>();
 
 
-        public void GotoContact()
+        public void GotoContact(string bookname)
         {
 
             while (true)
@@ -43,7 +44,7 @@ namespace Address_Book
 
                             if (flag)
                             {
-                                Contacts.Add(new Contact(FName));
+                                Contacts.Add(new Contact(FName, bookname));
                                 Console.WriteLine("\nRecord added to the Contacts");
                             }
                             else
@@ -174,6 +175,8 @@ namespace Address_Book
                 Console.WriteLine((i + 1) + ". " + persons[i]);
             }
         }
+
+        
     }
 
 }

@@ -1,4 +1,6 @@
-﻿namespace Address_Book
+﻿using System.Collections.Generic;
+
+namespace Address_Book
 {
     internal class Program
     {
@@ -79,7 +81,7 @@
             {
 
 
-                Console.WriteLine("\nWhat you want to do? \n1: Add New AddressBook \n2: Want to Add/Update contact to the AdressBook \n3: Want to Search person by their City \n4: count of persons in all cities \n5: View all persons by cities \n0: Exit from the System\n");
+                Console.WriteLine("\nWhat you want to do? \n1: Add New AddressBook \n2: Want to Add/Update contact to the AdressBook \n3: Want to Search person by their City \n4: count of persons in all cities \n5: View all persons by cities \n6: write data to the file \n7: read data from file \n0: Exit from the System\n");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice == 0)
                 {
@@ -120,7 +122,7 @@
                         else
                         {
                             AddressBook AddressBook = addressBooks[bookName1];
-                            AddressBook.GotoContact();
+                            AddressBook.GotoContact(bookName1);
                         }
                         break;
 
@@ -129,11 +131,19 @@
                         string City = Console.ReadLine();
                         List<Contact> Contacts = SearchByCity(City);
                         Console.WriteLine("");
-                        Console.WriteLine("\nBelow is the list of the names of the persons from " + City + " in multiple Address Books");
-                        foreach (Contact contact in Contacts)
+                        if (Contacts != null)
                         {
-                            Console.WriteLine(contact.getFName);
+                            Console.WriteLine("\nBelow is the list of the names of the persons from " + City + " in multiple Address Books");
+                            foreach (Contact contact in Contacts)
+                            {
+                                Console.WriteLine(contact.getFName);
+                            }
                         }
+                        else
+                        {
+                            Console.WriteLine("No contact found");
+                        } 
+                        
                         break;
 
                     case 4:
@@ -142,18 +152,37 @@
                         break;
 
                     case 5:
+                        Dictionary<string, List<Contact>> persons = ViewPersonsByCity();
                         Console.WriteLine("List of persons by city: ");
 
-                        foreach (var ob in ViewPersonsByCity())
+                        if (persons != null)
                         {
-                            int c = 0;
-                            Console.WriteLine("\n" + ob.Key);
-                            foreach (Contact contact in ob.Value)
+                            foreach (var ob in persons)
                             {
-                                c++;
-                                Console.WriteLine(c + ". " + contact);
+                                int c = 0;
+                                Console.WriteLine("\n" + ob.Key);
+                                foreach (Contact contact in ob.Value)
+                                {
+                                    c++;
+                                    Console.WriteLine(c + ". " + contact);
+                                }
                             }
                         }
+                        else
+                        {
+                            Console.WriteLine("Their are no persons in the AddressBook");
+                        }
+                        
+                        break;
+
+                    case 6:
+                        Write();
+                        Console.WriteLine("Data added to the file");
+                        break;
+
+                    case 7:
+                        Console.WriteLine("Below is the data from the file:\n");
+                        Read();
                         break;
 
                     default:
@@ -162,6 +191,38 @@
                 }
             }
         }
+
+        public static void Write()
+        {
+            string filepath = "E:\\BridgeLabz\\Address_Book\\fileIO\\contactList.txt";
+
+            using (StreamWriter sw = new StreamWriter(filepath))
+            {
+                foreach (var addressBook in addressBooks)
+                {
+                    foreach (Contact contact in addressBook.Value.getContactList())
+                    {
+                        sw.WriteLine(contact.ToString());
+                    }
+                }
+            }
+        }
+
+        public static void Read()
+        {
+            List<Contact> list = new List<Contact>();
+            string filepath = "E:\\BridgeLabz\\Address_Book\\fileIO\\contactList.txt";
+
+            using (StreamReader sr = File.OpenText(filepath))
+            {
+                string line;
+                while((line=sr.ReadLine())!=null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book. \n");
