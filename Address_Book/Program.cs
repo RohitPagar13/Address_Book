@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Newtonsoft.Json;
 
 namespace Address_Book
 {
@@ -85,7 +86,7 @@ namespace Address_Book
             {
 
 
-                Console.WriteLine("\nWhat you want to do? \n1: Add New AddressBook \n2: Want to Add/Update contact to the AdressBook \n3: Want to Search person by their City \n4: count of persons in all cities \n5: View all persons by cities \n6: write data to the file \n7: read data from file \n0: Exit from the System\n");
+                Console.WriteLine("\nWhat you want to do? \n1: Add New AddressBook \n2: Want to Add/Update contact to the AdressBook \n3: Want to Search person by their City \n4: count of persons in all cities \n5: View all persons by cities \n6: write data to the file \n7: read data from file \n8: write data to the CSV \n9: Read data from the CSV \n10: write data to the JSON \n11: Read data from the JSON \n0: Exit from the System\n");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice == 0)
                 {
@@ -202,6 +203,15 @@ namespace Address_Book
                         ReadDataFromCsv();
                         break;
 
+                    case 10:
+                        WriteDataToJSON();
+                        break;
+
+                    case 11:
+                        Console.WriteLine("Below is the data from the file:\n");
+                        ReadDataFromJSON();
+                        break;
+
                     default:
                         Console.WriteLine("Enter Valid choice");
                         break;
@@ -281,6 +291,48 @@ namespace Address_Book
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
             
+        }
+
+        public static void ReadDataFromJSON()
+        {
+            string filepath = "E:\\BridgeLabz\\Address_Book\\JSON\\contactList.json";
+
+            using (StreamReader sr = new StreamReader(filepath))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Contact c = JsonConvert.DeserializeObject<Contact>(line);
+                    Console.WriteLine(c);
+                }
+            }
+        }
+
+        public static void WriteDataToJSON()
+        {
+
+            try
+            {
+                string filepath = "E:\\BridgeLabz\\Address_Book\\JSON\\contactList.json";
+                using (StreamWriter sw = new StreamWriter(filepath))
+                {
+                    foreach (var addressBook in addressBooks)
+                    {
+                        foreach(var contact in addressBook.Value.getContactList())
+                        {
+                            string json = JsonConvert.SerializeObject(contact);
+                            sw.WriteLine(json);
+                        }
+                    }
+                    System.Console.WriteLine("Address book has been written to JSON file.");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
         }
 
         static void Main(string[] args)

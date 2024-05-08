@@ -11,6 +11,7 @@ namespace Address_Book
     {
         public ContactMap()
         {
+            Map(m => m.bookName).Name("bookName");
             Map(m => m.firstName).Name("firstName");
             Map(m => m.lastName).Name("lastName");
             Map(m => m.address).Name("address");
@@ -19,7 +20,6 @@ namespace Address_Book
             Map(m => m.zip).Name("zip");
             Map(m => m.phone).Name("phone");
             Map(m => m.email).Name("email");
-            Map(m => m.bookName).Name("bookName");
         }
     }
 }
